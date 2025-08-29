@@ -1,3 +1,10 @@
+<script lang="ts">
+import { defineComponent } from "vue";
+export default defineComponent({
+  name: "Navbar",
+});
+</script>
+
 <template>
   <nav class="navbar">
     <h1>App Navigation Bar</h1>
@@ -20,9 +27,3 @@ h1 {
   font-size: 24px;
 }
 </style>
-
-<script>
-export default {
-  name: "Navbar",
-};
-</script>

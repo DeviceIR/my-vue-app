@@ -22,5 +22,7 @@
 </style>
 
 <script>
-export default { name: "MainContainer" };
+import { defineComponent } from "vue";
+
+export default defineComponent({ name: "MainContainer" });
 </script>

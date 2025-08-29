@@ -1,12 +1,29 @@
-<script>
-import { onMounted, onUnmounted, ref } from "vue";
+<script lang="ts">
+import { defineComponent, onMounted, onUnmounted, ref } from "vue";
 
-export default {
+function dayMessage(): string {
+  const hour: number = new Date().getHours();
+  let message: string = "";
+
+  if (hour >= 4 && hour < 10) {
+    message = "Good morning sir";
+  } else if (hour >= 10 && hour < 15) {
+    message = "Good afternoon sir";
+  } else if (hour >= 15 && hour < 20) {
+    message = "Good evening sir";
+  } else {
+    message = "Good night sir";
+  }
+
+  return message;
+}
+
+export default defineComponent({
   name: "Dashboard",
   setup() {
-    const time = ref("");
+    const time = ref<string>("");
 
-    let intervalId;
+    let intervalId: ReturnType<typeof setInterval> | null = null;
 
     const updateTime = () => {
       const now = new Date();
@@ -16,36 +33,17 @@ export default {
     };
 
     onMounted(() => {
-      updateTime(); // set initial time immediately
+      updateTime();
       intervalId = setInterval(updateTime, 1000); // update every second
     });
 
     onUnmounted(() => {
-      clearInterval(intervalId);
+      if (intervalId) clearInterval(intervalId);
     });
 
-    return { time };
+    return { time, dayMessage };
   },
-
-  methods: {
-    dayMessage() {
-      const hour = new Date().getHours(); // local hour
-      let message = "";
-
-      if (hour >= 4 && hour < 10) {
-        message = "Good morning sir";
-      } else if (hour >= 10 && hour < 15) {
-        message = "Good afternoon sir";
-      } else if (hour >= 15 && hour < 20) {
-        message = "Good evening sir";
-      } else if (hour >= 20 || hour < 4) {
-        message = "Good night sir";
-      }
-
-      return message;
-    },
-  },
-};
+});
 </script>
 
 <style scoped></style>

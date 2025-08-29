@@ -1,16 +1,17 @@
-<script>
+<script lang="ts">
 import Sidebar from "./views/Sidebar.vue";
 import Navbar from "./views/Navbar.vue";
 import MainContainer from "./views/MainContainer.vue";
+import { defineComponent } from "vue";
 
-export default {
+export default defineComponent({
   name: "App",
   components: {
     Sidebar,
     Navbar,
     MainContainer,
   },
-};
+});
 </script>
 
 <template>

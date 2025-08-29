@@ -1,22 +1,20 @@
 import { createRouter, createWebHistory } from "vue-router";
-// import Home from "../views/Home.vue";
+import type { RouteRecordRaw } from "vue-router";
 import Dashboard from "../views/layouts/Dashboard.vue";
 import Weather from "../views/layouts/Weather.vue";
 import TodoList from "../views/layouts/TodoList.vue";
 import Profile from "../views/layouts/Profile.vue";
 
-const Empty = { template: "" };
-
-const routes = [
-  // its main route => its App.vue and inside it is Home
-  { path: "/", name: "Empty", component: Empty },
-
+// define routes with correct typing
+const routes: Array<RouteRecordRaw> = [
+  { path: "/", name: "Empty", component: { template: "" } },
   { path: "/dashboard", name: "Dashboard", component: Dashboard },
-  { path: "/Weather", name: "Weather", component: Weather },
-  { path: "/todo", name: "todolist", component: TodoList },
-  { path: "/profile", name: "profile", component: Profile },
+  { path: "/weather", name: "Weather", component: Weather },
+  { path: "/todo", name: "TodoList", component: TodoList },
+  { path: "/profile", name: "Profile", component: Profile },
 ];
 
+// create router with inferred types
 const router = createRouter({
   history: createWebHistory(),
   routes,

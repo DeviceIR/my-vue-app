@@ -16,20 +16,29 @@ div {
   gap: 1.2rem;
 }
 .sidebar {
-  height: 85vh;
-  margin-top: 10px;
+  height: 80vh;
+  margin: 10px 0;
+  padding-top: 2rem;
   background-color: #333;
   border: 1px solid rgb(229, 233, 8);
   border-radius: 10px;
 
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
 }
 </style>
 
-<script>
+<!-- <script>
 export default {
   name: "Sidebar",
 };
+</script> -->
+
+<script lang="ts">
+import { defineComponent } from "vue";
+
+export default defineComponent({
+  name: "Sidebar",
+});
 </script>
