@@ -1,18 +1,18 @@
 <script lang="ts">
 import { defineComponent, onMounted, onUnmounted, ref } from "vue";
 
-function dayMessage(): string {
+function dayMessage(username: string): string {
   const hour: number = new Date().getHours();
   let message: string = "";
 
   if (hour >= 4 && hour < 10) {
-    message = "Good morning sir";
+    message = `Good morning ${username}`;
   } else if (hour >= 10 && hour < 15) {
-    message = "Good afternoon sir";
+    message = `Good afternoon ${username}`;
   } else if (hour >= 15 && hour < 20) {
-    message = "Good evening sir";
+    message = `Good evening ${username}`;
   } else {
-    message = "Good night sir";
+    message = `Good night ${username}`;
   }
 
   return message;
@@ -21,6 +21,8 @@ function dayMessage(): string {
 export default defineComponent({
   name: "Dashboard",
   setup() {
+    const username = ref<string | null>("");
+    username.value = localStorage.getItem("userName");
     const time = ref<string>("");
 
     let intervalId: ReturnType<typeof setInterval> | null = null;
@@ -33,6 +35,10 @@ export default defineComponent({
     };
 
     onMounted(() => {
+      if (!username.value) username.value = prompt("enter your user name");
+
+      localStorage.setItem("userName", username.value ?? "");
+
       updateTime();
       intervalId = setInterval(updateTime, 1000); // update every second
     });
@@ -41,7 +47,7 @@ export default defineComponent({
       if (intervalId) clearInterval(intervalId);
     });
 
-    return { time, dayMessage };
+    return { time, dayMessage, username };
   },
 });
 </script>
@@ -51,7 +57,7 @@ export default defineComponent({
 <template>
   <div class="flex flex-col gap-12">
     <h1 class="!text-9xl">{{ time }}</h1>
-    <h3 class="text-4xl">{{ dayMessage() }}</h3>
+    <h3 class="text-4xl">{{ dayMessage(username ?? "") }}</h3>
   </div>
 </template>
 
