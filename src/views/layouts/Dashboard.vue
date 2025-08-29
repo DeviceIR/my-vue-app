@@ -49,8 +49,10 @@ export default defineComponent({
 <style scoped></style>
 
 <template>
-  <div class="dashboard">
-    <h1>{{ time }}</h1>
-    <h3>{{ dayMessage() }}</h3>
+  <div class="flex flex-col gap-12">
+    <h1 class="!text-9xl">{{ time }}</h1>
+    <h3 class="text-4xl">{{ dayMessage() }}</h3>
   </div>
 </template>
+
+<!-- done -->

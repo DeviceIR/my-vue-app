@@ -7,7 +7,7 @@ import Profile from "../views/layouts/Profile.vue";
 
 // define routes with correct typing
 const routes: Array<RouteRecordRaw> = [
-  { path: "/", name: "Empty", component: { template: "" } },
+  { path: "/", redirect: "/dashboard" },
   { path: "/dashboard", name: "Dashboard", component: Dashboard },
   { path: "/weather", name: "Weather", component: Weather },
   { path: "/todo", name: "TodoList", component: TodoList },
