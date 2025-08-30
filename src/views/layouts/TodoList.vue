@@ -19,6 +19,7 @@ function onInputChange() {
   const value = (event.target as HTMLInputElement).value;
   inputText.value = value;
 }
+
 function clearInputOnSubmit() {
   inputText.value = "";
 }
@@ -54,7 +55,8 @@ function removeTask(index: number) {
         </p>
 
         <div class="actionBtns">
-          <Button @click="() => removeTask(index)"> Edit </Button>
+          <!-- <Button @click="() => console.log('edit btn clicked');"> -->
+          <Button> Edit </Button>
           <Button @click="() => removeTask(index)"> Remove </Button>
         </div>
       </li>
