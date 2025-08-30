@@ -2,11 +2,16 @@
 import { ref, onMounted } from "vue";
 import { getTodayWeatherByCity } from "../../api/weatherApi";
 import type { WeatherData } from "../../api/weatherApi";
+import { useI18n } from "vue-i18n";
 
 const city = ref("");
 const weatherData = ref<WeatherData | null>(null);
 
 onMounted(async () => {
+  const { t, locale } = useI18n();
+  const language = ref(localStorage.getItem("userLang") || locale.value);
+
+  locale.value = language.value;
   city.value = prompt("Enter your city") || "";
   if (!city.value) return;
 
@@ -16,10 +21,10 @@ onMounted(async () => {
 
 <template>
   <div>
-    <h1>Weather for: {{ city }}</h1>
+    <h1>{{ $t("wheaterfor") }} {{ city }}</h1>
 
     <div v-if="weatherData?.hourly.time.length">
-      <p>Today's hourly temperature:</p>
+      <p class="mt-4">{{ $t("hourlytemp") }}</p>
       <ul class="grid grid-cols-2 mt-10">
         <li
           class="border-2 m-1"
@@ -37,7 +42,7 @@ onMounted(async () => {
       </ul>
     </div>
 
-    <div v-else-if="city">Loading weather...</div>
+    <div v-else-if="city">{{ $t("loadingWeather") }}</div>
     <div v-else>Enter a city to see weather.</div>
   </div>
 </template>

@@ -7,7 +7,7 @@ export default defineComponent({
 
 <template>
   <nav class="navbar">
-    <h1>App Navigation Bar</h1>
+    <h1>{{ $t("Navigation") }}</h1>
   </nav>
 </template>
 

@@ -1,19 +1,25 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { onUnmounted, ref, watch } from "vue";
 // @ts-ignore: ignore next line
 import Button from "../../ui/Button.vue";
-
-// const inputStatus = ref(false);
-const inputText = ref("");
+import { useI18n } from "vue-i18n";
 
 interface ListItem {
   text: string;
   priority: boolean;
 }
 
-const list = ref<ListItem[]>([]);
-console.log(list);
+const { t, locale } = useI18n();
+const language = ref(localStorage.getItem("userLang") || locale.value);
+const list = ref<ListItem[]>(
+  JSON.parse(localStorage.getItem("todoList") || "[]")
+);
+const inputText = ref("");
 
+//initiale
+locale.value = language.value;
+
+//functions
 function onInputChange() {
   // @ts-ignore: ignore next line
   const value = (event.target as HTMLInputElement).value;
@@ -24,24 +30,34 @@ function clearInputOnSubmit() {
   inputText.value = "";
 }
 
+function clearList() {
+  list.value = [];
+  localStorage.removeItem("todoList");
+}
+
 function addTask() {
-  // const s: string = prompt("enter ur task here,i dont have time to add input");
-
-  // if (!inputStatus.value) {
-  //   inputStatus.value = true;
-  // }
-
   if (inputText.value) {
-    list.value.push({
-      text: inputText.value,
-      priority: true,
-    });
+    list.value.push({ text: inputText.value, priority: true });
+    console.log(list.value);
     clearInputOnSubmit();
   }
 }
 function removeTask(index: number) {
   list.value.splice(index, 1);
 }
+
+//watch
+watch(
+  list,
+  (newList) => {
+    localStorage.setItem("todoList", JSON.stringify(newList));
+  },
+  { deep: true }
+);
+
+onUnmounted(() => {
+  localStorage.setItem("todoList", JSON.stringify(list.value));
+});
 </script>
 
 <template>
@@ -49,12 +65,20 @@ function removeTask(index: number) {
     class="todolist-layout flex flex-col gap-2 justify-between items-center h-11/12"
   >
     <ul class="mb-10 gap-12 p-0 w-2xl">
-      <li v-for="(item, index) in list" :key="index" class="listItem">
+      <li
+        v-for="(item, index) in list"
+        :key="index"
+        class="listItem"
+        :class="locale === 'fa' ? 'flex-row-reverse' : ''"
+      >
         <p>
           {{ item.text }}
         </p>
 
-        <div class="actionBtns">
+        <div
+          class="actionBtns"
+          :class="locale === 'fa' ? 'flex-row-reverse' : ''"
+        >
           <!-- <Button @click="() => console.log('edit btn clicked');"> -->
           <Button> Edit </Button>
           <Button @click="() => removeTask(index)"> Remove </Button>
@@ -69,10 +93,17 @@ function removeTask(index: number) {
         :value="inputText"
         @input="onInputChange"
         type="text"
-        placeholder="Enter your task..."
-        class="border-amber-50 border-1 italic w-96 px-4 py-2"
+        :placeholder="
+          locale === 'en' ? 'Enter Your Task' : 'برنامه خود را بنویسید'
+        "
+        :class="[
+          'border-amber-50 border-1 italic w-96 px-4 py-2',
+          locale === 'fa' ? 'text-right' : 'text-left',
+        ]"
       />
-      <Button class="w-40 text-center" @click="addTask"> Add Task </Button>
+      <Button class="w-40 text-center" @click="addTask">{{
+        $t("addTask")
+      }}</Button>
     </div>
   </div>
 </template>

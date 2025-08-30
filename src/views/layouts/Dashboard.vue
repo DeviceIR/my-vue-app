@@ -1,29 +1,29 @@
+<template>
+  <div class="flex flex-col gap-12">
+    <h1 class="!text-9xl">{{ time }}</h1>
+    <h3 class="text-4xl">{{ dayMessage(username) }}</h3>
+  </div>
+</template>
+
 <script lang="ts">
 import { defineComponent, onMounted, onUnmounted, ref } from "vue";
-
-function dayMessage(username: string): string {
-  const hour: number = new Date().getHours();
-  let message: string = "";
-
-  if (hour >= 4 && hour < 10) {
-    message = `Good morning ${username}`;
-  } else if (hour >= 10 && hour < 15) {
-    message = `Good afternoon ${username}`;
-  } else if (hour >= 15 && hour < 20) {
-    message = `Good evening ${username}`;
-  } else {
-    message = `Good night ${username}`;
-  }
-
-  return message;
-}
+import { useI18n } from "vue-i18n";
 
 export default defineComponent({
   name: "Dashboard",
   setup() {
-    const username = ref<string | null>("");
-    username.value = localStorage.getItem("userName");
-    const time = ref<string>("");
+    const { t, locale } = useI18n();
+
+    const username = ref(localStorage.getItem("userName") || "Guest");
+
+    const language = ref(localStorage.getItem("userLang") || locale.value);
+    const theme = ref(localStorage.getItem("userTheme") || "light");
+
+    locale.value = language.value;
+
+    document.documentElement.classList.toggle("dark", theme.value === "dark");
+
+    const time = ref("");
 
     let intervalId: ReturnType<typeof setInterval> | null = null;
 
@@ -34,13 +34,23 @@ export default defineComponent({
       time.value = `${hours}:${minutes}`;
     };
 
-    onMounted(() => {
-      if (!username.value) username.value = prompt("enter your user name");
+    const dayMessage = (username: string): string => {
+      const hour = new Date().getHours();
+      if (hour >= 4 && hour < 10) return `${t("morning")} ${username}`;
+      if (hour >= 10 && hour < 15) return `${t("afternoon")} ${username}`;
+      if (hour >= 15 && hour < 20) return `${t("evening")} ${username}`;
+      return `${t("night")} ${username}`;
+    };
 
-      localStorage.setItem("userName", username.value ?? "");
+    onMounted(() => {
+      // Prompt only if username is empty
+      if (!username.value) {
+        username.value = prompt("Enter your user name") || "Guest";
+        localStorage.setItem("userName", username.value);
+      }
 
       updateTime();
-      intervalId = setInterval(updateTime, 1000); // update every second
+      intervalId = setInterval(updateTime, 1000);
     });
 
     onUnmounted(() => {
@@ -52,13 +62,10 @@ export default defineComponent({
 });
 </script>
 
-<style scoped></style>
-
-<template>
-  <div class="flex flex-col gap-12">
-    <h1 class="!text-9xl">{{ time }}</h1>
-    <h3 class="text-4xl">{{ dayMessage(username ?? "") }}</h3>
-  </div>
-</template>
-
-<!-- done -->
+<style scoped>
+/* Dark mode example */
+.dark {
+  background-color: #1a202c;
+  color: #f7fafc;
+}
+</style>
