@@ -1,6 +1,6 @@
 <template>
   <div
-    class="sidebar flex flex-col mb-6 gap-7 justify-center px-6"
+    class="sidebar flex flex-col my-6 gap-7 justify-center px-6 lg:w-[25vh] md:w-[22vh]"
     :class="locale === 'fa' ? 'items-end' : 'items-start'"
   >
     <router-link
@@ -12,7 +12,10 @@
         name="home-outline"
         class="visible w-8 h-8 text-amber-50"
       ></ion-icon>
-      <span class="text-2xl mx-0 my-auto align-top">{{ $t("dashboard") }}</span>
+      <span
+        class="text-2xl mx-0 my-auto align-top text-[10px] xl:text-4xl md:text-[2rem] sm:text-[1.5rem]"
+        >{{ $t("dashboard") }}</span
+      >
     </router-link>
     <router-link
       to="/weather"
@@ -22,7 +25,10 @@
         name="cloudy-night-outline"
         class="visible w-8 h-8 text-amber-50 align-top"
       ></ion-icon>
-      <span class="text-2xl">{{ $t("weather") }}</span></router-link
+      <span
+        class="text-2xl text-[10px] xl:text-4xl md:text-[2rem] sm:text-[1.5rem]"
+        >{{ $t("weather") }}</span
+      ></router-link
     >
     <router-link
       to="/todo"
@@ -32,7 +38,10 @@
         name="book-outline"
         class="visible w-8 h-8 text-amber-50 align-top"
       ></ion-icon>
-      <span class="text-2xl">{{ $t("todo") }}</span></router-link
+      <span
+        class="text-2xl text-[10px] xl:text-4xl md:text-[2rem] sm:text-[1.5rem]"
+        >{{ $t("todo") }}</span
+      ></router-link
     >
     <router-link
       to="/profile"
@@ -42,7 +51,10 @@
         name="person-outline"
         class="visible w-8 h-8 text-amber-50 align-top"
       ></ion-icon>
-      <span class="text-2xl">{{ $t("profile") }}</span></router-link
+      <span
+        class="text-2xl text-[10px] xl:text-4xl md:text-[2rem] sm:text-[1.5rem]"
+        >{{ $t("profile") }}</span
+      ></router-link
     >
     <p class="self-center">
       lang test : <span>{{ locale }}</span>

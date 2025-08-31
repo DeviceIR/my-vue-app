@@ -62,13 +62,13 @@ onUnmounted(() => {
 
 <template>
   <div
-    class="todolist-layout flex flex-col gap-2 justify-between items-center h-11/12"
+    class="todolist-layout flex flex-col gap-2 justify-between items-center h-11/12 2xl:text-4xl xl:text-3xl lg:text-2xl md:text-2xl sm:text-xl"
   >
-    <ul class="mb-10 gap-12 p-0 w-2xl">
+    <ul class="mb-10 p-0 w-2xl flex flex-col justify-center items-center">
       <li
         v-for="(item, index) in list"
         :key="index"
-        class="listItem"
+        class="flex justify-between items-center bg-inherit text-white border-[1px] py-[10px] px-[20px] my-[20px] rounded-2xl 2xl:w-full xl:w-full lg:w-5/6 md:flex-col md:gap-8 sm:flex-col sm:gap-8 lg:flex-row"
         :class="locale === 'fa' ? 'flex-row-reverse' : ''"
       >
         <p>
@@ -97,13 +97,11 @@ onUnmounted(() => {
           locale === 'en' ? 'Enter Your Task' : 'برنامه خود را بنویسید'
         "
         :class="[
-          'border-amber-50 border-1 italic w-96 px-4 py-2',
+          'border-amber-50 border-1 italic  px-4 py-2 xl:w-[40rem] lg:w-[30rem] md:w-[15rem] sm:w-[12rem]',
           locale === 'fa' ? 'text-right' : 'text-left',
         ]"
       />
-      <Button class="w-40 text-center" @click="addTask">{{
-        $t("addTask")
-      }}</Button>
+      <Button class="text-center" @click="addTask">{{ $t("addTask") }}</Button>
     </div>
   </div>
 </template>
@@ -115,18 +113,7 @@ onUnmounted(() => {
   padding: 0;
   width: 40rem;
 }
-.listItem {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 
-  background-color: inherit;
-  color: #fefefe;
-  border: 1px solid #fefefe;
-  border-radius: 12px;
-  padding: 5px 16px;
-  margin: 20px 0;
-}
 .taskInput {
   padding: 12px 50px;
   margin: 20px 0;

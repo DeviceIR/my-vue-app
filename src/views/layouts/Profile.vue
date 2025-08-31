@@ -1,6 +1,10 @@
 <template>
-  <div class="p-6 max-w-md mx-auto space-y-6">
-    <h1 class="text-2xl font-bold">{{ $t("profileSetting") }}</h1>
+  <div
+    class="p-6 mx-auto space-y-6 2xl:text-4xl xl:text-3xl lg:text-2xl md:text-2xl sm:text-xl"
+  >
+    <h1 class="text-2xl font-bold md:!text-[2.9rem] sm:!text-[2rem]">
+      {{ $t("profileSetting") }}
+    </h1>
 
     <!-- Name update -->
     <div class="flex flex-col">

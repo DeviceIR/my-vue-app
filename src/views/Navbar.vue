@@ -7,7 +7,7 @@ export default defineComponent({
 
 <template>
   <nav class="navbar">
-    <h1>{{ $t("Navigation") }}</h1>
+    <h1 class="2xl:text-1xl">{{ $t("Navigation") }}</h1>
   </nav>
 </template>
 
@@ -24,6 +24,6 @@ export default defineComponent({
 h1 {
   font-style: italic;
   color: #fff;
-  font-size: 24px;
+  /* font-size: 24px; */
 }
 </style>

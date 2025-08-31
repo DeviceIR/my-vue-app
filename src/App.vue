@@ -65,14 +65,16 @@ provide("changeName", changeName);
 <template>
   <div class="appLayout">
     <!-- Navbar -->
-    <Navbar />
+    <Navbar
+      class="text-[10px] 2xl:text-2xl xl:text-2xl lg:text-1xl md:text-[1rem] sm:text-[0.7rem]"
+    />
 
     <!-- Content => Sidebar + Container -->
     <div class="content">
       <Sidebar />
 
       <!-- Router views -->
-      <MainContainer class="container">
+      <MainContainer>
         <router-view />
       </MainContainer>
     </div>
@@ -87,7 +89,7 @@ provide("changeName", changeName);
 }
 .content {
   display: grid;
-  grid-template-columns: 20% 1fr;
+  grid-template-columns: 1fr 4fr;
   flex: 1;
   overflow: hidden;
 }

@@ -32,7 +32,7 @@ const sizeClass = computed(() => sizes[props.size ?? "md"]);
       'rounded-lg font-semibold transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed',
       variantClass,
       sizeClass,
-      $attrs.class, // <-- merge parent classes
+      $attrs.class,
     ]"
     :disabled="props.disabled"
     @click="emit('click')"
