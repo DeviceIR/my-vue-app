@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col gap-12">
     <h1 class="">{{ time }}</h1>
-    <h3 class="">
+    <h3 class="md:text-4xl sm:text-3xl">
       {{ dayMessage(username) }}
     </h3>
   </div>

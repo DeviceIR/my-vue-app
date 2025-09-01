@@ -3,6 +3,7 @@ import { onUnmounted, ref, watch } from "vue";
 import { Icon } from "@iconify/vue";
 // @ts-ignore: ignore next line
 import Button from "../../ui/Button.vue";
+import ButtonIcon from "../../ui/ButtonIcon.vue";
 import { useI18n } from "vue-i18n";
 
 interface ListItem {
@@ -63,35 +64,15 @@ onUnmounted(() => {
 
 <template>
   <div
-    class="todolist-layout flex flex-col gap-2 justify-between items-center h-11/12 2xl:text-2xl xl:text-3xl lg:text-2xl md:text-2xl sm:text-xl"
+    class="todolist-layout flex flex-col gap-2 justify-between items-center h-11/12 2xl:text-4xl xl:text-3xl lg:text-2xl md:text-2xl sm:text-xl"
   >
-    <!-- <ul class="mb-10 p-0 w-2xl flex flex-col justify-center items-center">
-      <li
-        v-for="(item, index) in list"
-        :key="index"
-        class="flex justify-between items-center bg-inherit text-white border-[1px] py-[10px] px-[20px] my-[20px] rounded-2xl 2xl:w-full xl:w-full lg:w-5/6 md:flex-col md:gap-8 sm:flex-col sm:gap-8 lg:flex-row"
-        :class="locale === 'fa' ? 'flex-row-reverse' : ''"
-      >
-        <p>
-          {{ item.text }}
-        </p>
-
-        <div
-          class="actionBtns"
-          :class="locale === 'fa' ? 'flex-row-reverse' : ''"
-        >
-          <Button> Edit </Button>
-          <Button @click="() => removeTask(index)"> Remove </Button>
-        </div>
-      </li>
-    </ul> -->
     <ul
       class="mb-10 p-0 w-2xl flex flex-col justify-center items-center scroll-auto"
     >
       <li
         v-for="(item, index) in list"
         :key="index"
-        class="grid grid-cols-[4fr_1fr] bg-inherit text-white border-[1px] py-[10px] px-[20px] my-[10px] rounded-2xl 2xl:w-full xl:w-full lg:w-5/6 md:flex-col md:gap-8 sm:flex-col sm:gap-8 lg:flex-row"
+        class="w-[15rem] h-[5rem] sm:grid sm:grid-cols-[4fr_1fr] bg-inherit text-white border-[1px] py-[10px] px-[20px] my-[10px] rounded-2xl 2xl:w-full xl:w-full lg:w-5/6 md:flex-col md:gap-8 md:w-[20rem] sm:w-[18rem] sm:flex-col sm:gap-8 lg:flex-row"
         :class="locale === 'fa' ? 'flex-row-reverse' : ''"
       >
         <p class="wrap-anywhere">
@@ -99,17 +80,23 @@ onUnmounted(() => {
         </p>
 
         <div
-          class="actionBtns flex gap-4"
+          class="actionBtns flex gap-4 items-center justify-center"
           :class="locale === 'fa' ? 'flex-row-reverse' : ''"
         >
           <!-- <Button> Edit </Button>
           <Button @click="() => removeTask(index)"> Remove </Button> -->
-          <Button>
-            <Icon icon="mdi:pencil" width="20" height="20" />
-          </Button>
-          <Button @click="() => removeTask(index)">
-            <Icon icon="mdi:trash-can" width="20" height="20" />
-          </Button>
+          <ButtonIcon>
+            <Icon
+              icon="mdi:pencil"
+              class="w-[15px] h-[15px] sm:w-[15px] sm:h-[15px] md:w-[20px] md:h-[20px] lg:w-[25px] lg:h-[25px]"
+            />
+          </ButtonIcon>
+          <ButtonIcon @click="() => removeTask(index)">
+            <Icon
+              icon="mdi:trash-can"
+              class="w-[15px] h-[15px] sm:w-[20px] sm:h-[20px] md:w-[20px] md:h-[20px] lg:w-[25px] lg:h-[25px]"
+            />
+          </ButtonIcon>
         </div>
       </li>
     </ul>

@@ -17,10 +17,13 @@
     "vue-router": "^4.5.1"
   },
   "devDependencies": {
+    "@cypress/vite-dev-server": "^7.0.0",
+    "@cypress/vue": "^6.0.2",
     "@tailwindcss/vite": "^4.1.12",
     "@vitejs/plugin-vue": "^6.0.1",
     "@vue/tsconfig": "^0.7.0",
     "autoprefixer": "^10.4.21",
+    "cypress": "^15.0.0",
     "postcss": "^8.5.6",
     "tailwindcss": "^4.1.12",
     "typescript": "~5.8.3",
