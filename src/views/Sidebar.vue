@@ -65,6 +65,7 @@
 <style scoped>
 .sidebar {
   height: 80vh;
+  width: 100%;
   background-color: #333;
   border: 1px solid rgb(229, 233, 8);
   border-radius: 10px;

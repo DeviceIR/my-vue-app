@@ -6,14 +6,14 @@ export default defineComponent({
 </script>
 
 <template>
-  <nav class="navbar">
+  <nav class="navbar flex justify-center items-center pb-4">
     <h1 class="2xl:text-1xl">{{ $t("Navigation") }}</h1>
   </nav>
 </template>
 
 <style scoped>
 .navbar {
-  height: 10vh;
+  height: 12vh;
   background-color: #333;
   display: flex;
   justify-content: center;

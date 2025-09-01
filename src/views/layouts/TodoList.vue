@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { onUnmounted, ref, watch } from "vue";
+import { Icon } from "@iconify/vue";
 // @ts-ignore: ignore next line
 import Button from "../../ui/Button.vue";
 import { useI18n } from "vue-i18n";
@@ -62,9 +63,9 @@ onUnmounted(() => {
 
 <template>
   <div
-    class="todolist-layout flex flex-col gap-2 justify-between items-center h-11/12 2xl:text-4xl xl:text-3xl lg:text-2xl md:text-2xl sm:text-xl"
+    class="todolist-layout flex flex-col gap-2 justify-between items-center h-11/12 2xl:text-2xl xl:text-3xl lg:text-2xl md:text-2xl sm:text-xl"
   >
-    <ul class="mb-10 p-0 w-2xl flex flex-col justify-center items-center">
+    <!-- <ul class="mb-10 p-0 w-2xl flex flex-col justify-center items-center">
       <li
         v-for="(item, index) in list"
         :key="index"
@@ -79,16 +80,45 @@ onUnmounted(() => {
           class="actionBtns"
           :class="locale === 'fa' ? 'flex-row-reverse' : ''"
         >
-          <!-- <Button @click="() => console.log('edit btn clicked');"> -->
           <Button> Edit </Button>
           <Button @click="() => removeTask(index)"> Remove </Button>
+        </div>
+      </li>
+    </ul> -->
+    <ul
+      class="mb-10 p-0 w-2xl flex flex-col justify-center items-center scroll-auto"
+    >
+      <li
+        v-for="(item, index) in list"
+        :key="index"
+        class="grid grid-cols-[4fr_1fr] bg-inherit text-white border-[1px] py-[10px] px-[20px] my-[10px] rounded-2xl 2xl:w-full xl:w-full lg:w-5/6 md:flex-col md:gap-8 sm:flex-col sm:gap-8 lg:flex-row"
+        :class="locale === 'fa' ? 'flex-row-reverse' : ''"
+      >
+        <p class="wrap-anywhere">
+          {{ item.text }}
+        </p>
+
+        <div
+          class="actionBtns flex gap-4"
+          :class="locale === 'fa' ? 'flex-row-reverse' : ''"
+        >
+          <!-- <Button> Edit </Button>
+          <Button @click="() => removeTask(index)"> Remove </Button> -->
+          <Button>
+            <Icon icon="mdi:pencil" width="20" height="20" />
+          </Button>
+          <Button @click="() => removeTask(index)">
+            <Icon icon="mdi:trash-can" width="20" height="20" />
+          </Button>
         </div>
       </li>
     </ul>
 
     <!-- add task btn -->
     <!-- :disabled="inputStatus" -->
-    <div class="mt-2 flex flex-col gap-4 items-center">
+    <div
+      class="sticky bottom-0 bg-inherit py-4 flex flex-col gap-4 items-center"
+    >
       <input
         :value="inputText"
         @input="onInputChange"
