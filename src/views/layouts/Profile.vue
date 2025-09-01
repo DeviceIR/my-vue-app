@@ -36,8 +36,8 @@
     <div class="flex flex-col">
       <label class="font-medium mb-1">{{ $t("theme") }}</label>
       <select v-model="theme" class="border rounded px-3 py-2">
-        <option value="light" class="bg-black">{{ $t("dark") }}</option>
-        <option value="dark" class="bg-white text-black">
+        <option value="dark" class="bg-black">{{ $t("dark") }}</option>
+        <option value="light" class="bg-white text-black">
           {{ $t("light") }}
         </option>
       </select>
@@ -91,8 +91,8 @@ const saved = ref(false); // track save message
 onMounted(() => {
   name.value = localStorage.getItem("userName") || "";
   theme.value = localStorage.getItem("userTheme") || "light";
-
   const savedLang = localStorage.getItem("userLang");
+
   if (savedLang) {
     language.value = savedLang;
     locale.value = savedLang;

@@ -60,11 +60,34 @@ button:focus-visible {
   width: 100%;
   text-align: center;
 }
+:root {
+  /* Light mode variables */
+  --bg-color: #ffffff;
+  --text-color: #333;
+  --border-color: 1px solid rgb(35, 36, 7);
+  --border-secondary: 1px solid #333;
+}
+
+:root.dark {
+  /* Dark mode variables */
+  --bg-color: #333;
+  --text-color: #ffffff;
+  --border-color: 1px solid rgb(229, 233, 8);
+  --border-secondary: 1px solid #fefefe;
+}
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    /* Light mode variables */
+    --bg-color: #ffffff;
+    --text-color: #333;
+    border: black;
+  }
+
+  :root.dark {
+    /* Dark mode variables */
+    --bg-color: #333;
+    --text-color: #ffffff;
   }
   a:hover {
     color: #747bff;

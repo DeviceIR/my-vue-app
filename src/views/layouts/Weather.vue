@@ -20,14 +20,23 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div>
-    <h1>{{ $t("wheaterfor") }} {{ city }}</h1>
+  <div class="flex flex-col h-full text-[1rem]">
+    <!-- Header always on top -->
+    <header class="flex flex-col sticky top-0 z-10 p-4">
+      <h1 class="xl:!text-7xl lg:!text-6xl md:!text-[2.2rem] sm:!text-[1.5rem]">
+        {{ $t("wheaterfor") }} {{ city }}
+      </h1>
+      <p class="mt-2">{{ $t("hourlytemp") }}</p>
+    </header>
 
-    <div v-if="weatherData?.hourly.time.length">
-      <p class="mt-4">{{ $t("hourlytemp") }}</p>
-      <ul class="grid grid-cols-2 mt-10">
+    <!-- Scrollable content -->
+    <div
+      class="flex-1 overflow-y-auto p-2"
+      v-if="weatherData?.hourly.time.length"
+    >
+      <ul class="grid grid-cols-2 md:grid-cols-2 sm:grid-cols-1">
         <li
-          class="border-2 m-1"
+          class="border-2 m-1 md:px-2 2xl:!text-3xl xl:!text-3xl md:!text-[1.2rem]"
           v-for="(t, i) in weatherData.hourly.temperature_2m"
           :key="i"
         >

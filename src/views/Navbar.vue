@@ -1,23 +1,33 @@
-<script lang="ts">
-import { defineComponent } from "vue";
-export default defineComponent({
-  name: "Navbar",
-});
+<script setup lang="ts">
+import { inject } from "vue";
+import type { Ref } from "vue";
+
+const theme = inject<Ref<string>>("theme");
+const saveSettings = inject<() => void>("saveSettings");
+// const theme = localStorage.getItem("userTheme");
+let col = theme?.value;
+console.log(col);
 </script>
 
 <template>
-  <nav class="navbar flex justify-center items-center pb-4">
-    <h1 class="2xl:text-1xl">{{ $t("Navigation") }}</h1>
+  <nav
+    class="navbar flex justify-center items-center pb-4"
+    :style="{
+      backgroundColor: 'var(--bg-color)',
+
+      border: 'var(--border-color)',
+    }"
+    :class="col === 'dark' ? 'bg-black text-white' : 'bg-white text-black'"
+  >
+    <h1 class="2xl:text-1xl" :style="{ color: 'var(--text-color)' }">
+      {{ $t("Navigation") }}
+    </h1>
   </nav>
 </template>
 
 <style scoped>
 .navbar {
   height: 12vh;
-  background-color: #333;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   border: 1px solid rgb(229, 233, 8);
   border-radius: 10px;
 }

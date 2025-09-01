@@ -1,5 +1,8 @@
 <template>
-  <div class="flex flex-col gap-12">
+  <div
+    class="child flex flex-col gap-12"
+    :style="{ backgroundColor: 'var(--bg-color)', color: 'var(--text-color)' }"
+  >
     <h1 class="">{{ time }}</h1>
     <h3 class="md:text-4xl sm:text-3xl">
       {{ dayMessage(username) }}
@@ -8,7 +11,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, onUnmounted, ref } from "vue";
+import {
+  defineComponent,
+  inject,
+  onMounted,
+  onUnmounted,
+  ref,
+  type Ref,
+} from "vue";
 import { useI18n } from "vue-i18n";
 
 export default defineComponent({
@@ -16,10 +26,11 @@ export default defineComponent({
   setup() {
     const { t, locale } = useI18n();
 
-    const username = ref(localStorage.getItem("userName") || "Guest");
+    // const username = ref(localStorage.getItem("userName") || "Guest");
 
-    const language = ref(localStorage.getItem("userLang") || locale.value);
-    const theme = ref(localStorage.getItem("userTheme") || "light");
+    const username = inject("name") as Ref<string>; // TypeScript type
+    const language = inject("language") as Ref<string>; // TypeScript type
+    const theme = inject("theme") as Ref<string>; // TypeScript type
 
     locale.value = language.value;
 
@@ -59,15 +70,13 @@ export default defineComponent({
       if (intervalId) clearInterval(intervalId);
     });
 
-    return { time, dayMessage, username };
+    return { time, dayMessage, username, language, theme };
   },
 });
 </script>
 
 <style scoped>
-/* Dark mode example */
-.dark {
-  background-color: #1a202c;
-  color: #f7fafc;
+.child {
+  background-color: var(bg);
 }
 </style>

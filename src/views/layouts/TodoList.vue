@@ -73,6 +73,7 @@ onUnmounted(() => {
         v-for="(item, index) in list"
         :key="index"
         class="w-[15rem] h-[5rem] sm:grid sm:grid-cols-[4fr_1fr] bg-inherit text-white border-[1px] py-[10px] px-[20px] my-[10px] rounded-2xl 2xl:w-full xl:w-full lg:w-5/6 md:flex-col md:gap-8 md:w-[20rem] sm:w-[18rem] sm:flex-col sm:gap-8 lg:flex-row"
+        :style="{ color: 'var(--text-color)' }"
         :class="locale === 'fa' ? 'flex-row-reverse' : ''"
       >
         <p class="wrap-anywhere">
@@ -113,8 +114,9 @@ onUnmounted(() => {
         :placeholder="
           locale === 'en' ? 'Enter Your Task' : 'برنامه خود را بنویسید'
         "
+        :style="{ border: 'var(--border-secondary)' }"
         :class="[
-          'border-amber-50 border-1 italic  px-4 py-2 xl:w-[40rem] lg:w-[30rem] md:w-[15rem] sm:w-[12rem]',
+          'border-amber-50 border-1 italic  px-4 py-2 xl:w-[40rem] lg:w-[30rem] md:w-[15rem] sm:w-[12rem] rounded-2xl',
           locale === 'fa' ? 'text-right' : 'text-left',
         ]"
       />

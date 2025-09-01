@@ -1,6 +1,11 @@
 <template>
   <div
-    class="container flex justify-center items-center my-5 mx-10 xl:w-5/6 md:text-[2.5rem] sm:text-[2rem] lg:text-[3rem]"
+    class="container flex justify-center items-center my-5 mx-10 xl:w-5/6 md:text-[2.5rem] sm:text-[2rem] lg:text-[3rem] overflow-x-hidden"
+    :style="{
+      backgroundColor: 'var(--bg-color)',
+      color: 'var(--text-color)',
+      border: 'var(--border-color)',
+    }"
   >
     <slot />
   </div>
@@ -8,8 +13,6 @@
 
 <style scoped>
 .container {
-  background-color: #333;
-  border: 1px solid rgb(229, 233, 8);
   overflow-y: auto;
   border-radius: 10px;
   height: 80vh;
@@ -19,8 +22,4 @@
 }
 </style>
 
-<script>
-import { defineComponent } from "vue";
-
-export default defineComponent({ name: "MainContainer" });
-</script>
+<script setup lang="ts"></script>
