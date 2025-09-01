@@ -2,14 +2,28 @@
   <div
     class="p-6 mx-auto space-y-6 2xl:text-4xl xl:text-3xl lg:text-2xl md:text-2xl sm:text-xl"
   >
-    <h1 class="text-2xl font-bold md:!text-[2.9rem] sm:!text-[2rem]">
+    <!-- <h1 class="text-2xl font-bold md:!text-[2.9rem] sm:!text-[2rem]">
+      {{ $t("profileSetting") }}
+    </h1> -->
+    <h1
+      data-cy="profile-heading"
+      class="text-2xl font-bold md:!text-[2.9rem] sm:!text-[2rem]"
+    >
       {{ $t("profileSetting") }}
     </h1>
 
     <!-- Name update -->
     <div class="flex flex-col">
       <label class="font-medium mb-1">{{ $t("username") }}</label>
+      <!-- <input
+        type="text"
+        v-model="name"
+        placeholder="Enter your name"
+        class="border rounded px-3 py-2"
+        @input="changeName"
+      /> -->
       <input
+        data-cy="username-input"
         type="text"
         v-model="name"
         placeholder="Enter your name"
@@ -42,12 +56,24 @@
     </div>
 
     <!-- Save button -->
+    <!-- <button
+      @click="saveSettings"
+      class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+    >
+      {{ $t("saveSetting") }}
+    </button> -->
     <button
+      data-cy="save-button"
       @click="saveSettings"
       class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
     >
       {{ $t("saveSetting") }}
     </button>
+
+    <!-- success -->
+    <div v-if="saved" data-cy="save-message" class="text-green-500">
+      Settings saved!
+    </div>
   </div>
 </template>
 
@@ -60,6 +86,7 @@ const { locale } = useI18n();
 const name = ref("");
 const theme = ref("light");
 const language = ref("en");
+const saved = ref(false); // track save message
 
 onMounted(() => {
   name.value = localStorage.getItem("userName") || "";
@@ -85,7 +112,8 @@ function saveSettings() {
 
   document.documentElement.classList.toggle("dark", theme.value === "dark");
 
-  alert("Settings saved!");
+  saved.value = true;
+  setTimeout(() => (saved.value = false), 3000);
 }
 function changeName() {
   name.value = (event?.target as HTMLInputElement).value;

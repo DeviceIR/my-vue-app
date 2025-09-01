@@ -1,6 +1,6 @@
 import { defineConfig } from "cypress";
 
-module.exports = defineConfig({
+export default defineConfig({
   component: {
     devServer: {
       framework: "vue",
@@ -8,8 +8,7 @@ module.exports = defineConfig({
     },
   },
   e2e: {
-    setupNodeEvents(on, config) {
-      // add e2e plugins here if needed
-    },
+    baseUrl: "http://localhost:5173",
+    setupNodeEvents(on, config) {},
   },
 });
